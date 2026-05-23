@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(uipro init *)",
-      "Bash(python3 *)",
-      "WebFetch(domain:www.linkedin.com)"
-    ]
-  }
-}

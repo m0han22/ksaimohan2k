@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# saimohan.dev — personal site
 
-## Getting Started
+Minimalist single-page landing built with **Next.js 16 · React 19 · TypeScript · Tailwind v4 · shadcn/ui**.
 
-First, run the development server:
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install   # first time only
+bun dev       # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other scripts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run build   # production build
+bun run start   # serve the build
+bun run lint    # eslint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Edit content
 
-## Learn More
+All editable content lives in **`lib/data.ts`**. Update your profile, experience, projects, skills, and socials there — the page rerenders automatically.
 
-To learn more about Next.js, take a look at the following resources:
+```
+lib/
+├── data.ts       # ← edit this: profile, experience, projects, skills, socials
+├── types.ts      # type definitions
+└── utils.ts      # cn() helper
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+app/
+├── layout.tsx              # root layout, fonts, SEO metadata, JSON-LD
+├── page.tsx                # composes the six sections
+└── globals.css             # Tailwind v4 + design tokens
 
-## Deploy on Vercel
+components/
+├── nav.tsx                 # sticky top nav
+├── footer.tsx
+├── animated-section.tsx    # IntersectionObserver fade-in wrapper
+├── social-icon.tsx         # social brand icons (inline SVG)
+├── sections/               # one file per page section
+│   ├── hero.tsx
+│   ├── about.tsx
+│   ├── experience.tsx
+│   ├── projects.tsx
+│   ├── skills.tsx
+│   └── contact.tsx
+└── ui/                     # shadcn primitives (button, card, badge, tooltip, separator)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Theme
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Monochrome palette with a single blue accent (`#2563EB`). Defined as CSS variables in `app/globals.css` — change `--accent-blue` (and the matching `oklch` value) to retune the accent.
+
+Typography:
+- Headings: **Space Grotesk**
+- Body: **Archivo**
+
+Both loaded via `next/font` (no external requests).
+
+## Deploy
+
+### Vercel (recommended)
+
+```bash
+bunx vercel
+```
+
+Push to a GitHub repo and import it at [vercel.com/new](https://vercel.com/new). Zero config needed.
+
+### Anywhere else
+
+```bash
+bun run build
+bun run start
+```
