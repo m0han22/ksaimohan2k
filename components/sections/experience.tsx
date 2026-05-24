@@ -85,7 +85,7 @@ export function Experience() {
       </p>
       <h2
         id="experience-heading"
-        className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl"
+        className="mt-3 text-4xl tracking-tight sm:text-5xl"
       >
         Where I've worked.
       </h2>

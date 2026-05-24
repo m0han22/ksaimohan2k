@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-archivo);
+  --font-sans: var(--font-inter);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  --font-heading: var(--font-space-grotesk);
+  --font-heading: var(--font-instrument-serif);
   --color-accent-blue: var(--accent-blue);
   --color-accent-blue-foreground: var(--accent-blue-foreground);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -144,8 +144,9 @@
     scroll-behavior: smooth;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    font-family: var(--font-heading), ui-serif, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.015em;
   }
   ::selection {
     background: var(--accent-blue);

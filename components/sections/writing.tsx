@@ -23,7 +23,7 @@ export function Writing() {
       </p>
       <h2
         id="writing-heading"
-        className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl"
+        className="mt-3 text-4xl tracking-tight sm:text-5xl"
       >
         Notes on what I'm learning.
       </h2>
@@ -51,7 +51,7 @@ export function Writing() {
                   {formatDate(post.date)}
                 </time>
                 <div>
-                  <h3 className="text-lg font-medium tracking-tight text-foreground transition-colors group-hover:text-accent-blue">
+                  <h3 className="text-xl tracking-tight text-foreground transition-colors group-hover:text-accent-blue">
                     {post.title}
                   </h3>
                   <p className="mt-1.5 text-pretty text-sm text-muted-foreground">

@@ -41,7 +41,7 @@ export function Hero() {
 
         <h1
           id="hero-heading"
-          className="mt-5 text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
+          className="mt-5 text-balance text-5xl leading-[1.02] tracking-tight sm:text-7xl lg:text-[5.5rem]"
         >
           {profile.name}
         </h1>
@@ -64,7 +64,7 @@ export function Hero() {
         </p>
 
         <p
-          className="mt-10 max-w-3xl text-balance text-2xl leading-snug tracking-tight text-foreground sm:text-3xl lg:text-[2.5rem]"
+          className="mt-10 max-w-3xl text-balance text-2xl italic leading-snug tracking-tight text-foreground sm:text-3xl lg:text-[2.5rem]"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {profile.tagline}

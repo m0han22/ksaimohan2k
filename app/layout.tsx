@@ -1,32 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Space_Grotesk } from "next/font/google";
+import { Inter, Instrument_Serif } from "next/font/google";
 import Script from "next/script";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { profile, socials } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const siteUrl = "https://saimohan.dev";
 const description = `${profile.role} at ${profile.company}, based in ${profile.location}. ${profile.tagline}`;
+const titleSuffix = `${profile.name} · ${profile.role}`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: `${profile.name} — ${profile.role}`,
-    template: `%s — ${profile.name}`,
+    default: titleSuffix,
+    template: `%s · ${profile.name}`,
   },
   description,
   authors: [{ name: profile.name }],
@@ -44,14 +46,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     locale: "en_US",
-    url: siteUrl,
+    url: SITE_URL,
     siteName: profile.name,
-    title: `${profile.name} — ${profile.role}`,
+    title: titleSuffix,
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${profile.name} — ${profile.role}`,
+    title: titleSuffix,
     description,
   },
   robots: {
@@ -80,7 +82,7 @@ const personJsonLd = {
     "@type": "PostalAddress",
     addressLocality: profile.location,
   },
-  url: siteUrl,
+  url: SITE_URL,
   sameAs: socials
     .filter((s) => s.kind !== "email")
     .map((s) => s.href),
@@ -94,7 +96,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} ${instrumentSerif.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans">

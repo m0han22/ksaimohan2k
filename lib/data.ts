@@ -41,6 +41,7 @@ export const experience: Experience[] = [
   },
   {
     company: "Spire Solutions",
+    companyUrl: "https://www.spiresolutions.com",
     title: "Technical Consultant",
     start: "2023",
     end: "2025",

@@ -11,7 +11,7 @@ export function About() {
       <SectionLabel>About</SectionLabel>
       <h2
         id="about-heading"
-        className="mt-3 max-w-3xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl"
+        className="mt-3 max-w-3xl text-balance text-4xl tracking-tight sm:text-5xl"
       >
         Systems over models.
       </h2>

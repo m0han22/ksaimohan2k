@@ -15,7 +15,7 @@ export function Projects() {
       </p>
       <h2
         id="projects-heading"
-        className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl"
+        className="mt-3 text-4xl tracking-tight sm:text-5xl"
       >
         Things I've shipped.
       </h2>
@@ -39,7 +39,7 @@ export function Projects() {
                 className="group relative flex h-full flex-col rounded-xl border border-border/70 bg-card p-6 transition-all duration-200 hover:border-foreground/30 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-lg font-semibold tracking-tight">
+                  <h3 className="text-xl tracking-tight">
                     {p.title}
                   </h3>
                   {href ? (

@@ -19,7 +19,7 @@ export function Contact() {
         </p>
         <h2
           id="contact-heading"
-          className="mt-3 max-w-2xl text-balance text-3xl font-semibold tracking-tight sm:text-4xl"
+          className="mt-3 max-w-2xl text-balance text-4xl tracking-tight sm:text-5xl"
         >
           Have an idea, a role, or just want to say hi?
         </h2>
