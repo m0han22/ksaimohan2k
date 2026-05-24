@@ -1,6 +1,14 @@
+import { type ReactNode } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { AnimatedSection } from "@/components/animated-section";
-import { education, experience, socials } from "@/lib/data";
+import {
+  certifications,
+  education,
+  experience,
+  research,
+  scholarUrl,
+  socials,
+} from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 function formatRange(start: string, end: string): string {
@@ -11,20 +19,20 @@ function formatRange(start: string, end: string): string {
 
 type Row = {
   range: string;
-  isCurrent: boolean;
+  current?: boolean;
   primary: string;
-  primaryHref?: string;
-  secondary: string;
-  location: string;
+  secondary?: string;
+  secondaryHref?: string;
+  right?: ReactNode;
 };
 
-function Row({ row }: { row: Row }) {
+function RowItem({ row }: { row: Row }) {
   return (
     <li className="grid grid-cols-[64px_1fr] items-baseline gap-x-4 gap-y-1 py-4 sm:grid-cols-[80px_1fr_auto] sm:items-center sm:gap-x-8 sm:py-5">
       <span
         className={cn(
           "text-sm tabular-nums",
-          row.isCurrent
+          row.current
             ? "font-medium text-accent-blue"
             : "text-muted-foreground",
         )}
@@ -33,24 +41,81 @@ function Row({ row }: { row: Row }) {
       </span>
       <span className="text-[15px] leading-snug">
         <span className="text-foreground">{row.primary}</span>
-        <span className="mx-2 text-border">·</span>
-        {row.primaryHref ? (
-          <a
-            href={row.primaryHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-foreground underline-offset-4 hover:underline"
-          >
-            {row.secondary}
-          </a>
-        ) : (
-          <span className="text-foreground">{row.secondary}</span>
-        )}
+        {row.secondary ? (
+          <>
+            <span className="mx-2 text-border">·</span>
+            {row.secondaryHref ? (
+              <a
+                href={row.secondaryHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline-offset-4 hover:underline"
+              >
+                {row.secondary}
+              </a>
+            ) : (
+              <span className="text-foreground">{row.secondary}</span>
+            )}
+          </>
+        ) : null}
       </span>
-      <span className="col-start-2 text-sm text-muted-foreground sm:col-start-3 sm:text-right">
-        {row.location}
-      </span>
+      {row.right ? (
+        <span className="col-start-2 text-sm text-muted-foreground sm:col-start-3 sm:text-right">
+          {row.right}
+        </span>
+      ) : null}
     </li>
+  );
+}
+
+function Block({
+  label,
+  rows,
+  action,
+  className,
+}: {
+  label: string;
+  rows: Row[];
+  action?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+          {label}
+        </p>
+        {action}
+      </div>
+      <ul className="mt-4 divide-y divide-border/60 border-y border-border/60">
+        {rows.map((row, i) => (
+          <RowItem key={`${row.primary}-${row.range}-${i}`} row={row} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ExternalLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
+    >
+      {children}
+      <ArrowUpRight
+        aria-hidden="true"
+        className="h-3 w-3 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+      />
+    </a>
   );
 }
 
@@ -59,19 +124,33 @@ export function Experience() {
 
   const experienceRows: Row[] = experience.map((role) => ({
     range: formatRange(role.start, role.end),
-    isCurrent: role.end === "Present",
+    current: role.end === "Present",
     primary: role.title,
-    primaryHref: role.companyUrl,
     secondary: role.company,
-    location: role.location ?? "",
+    secondaryHref: role.companyUrl,
+    right: role.location,
   }));
 
   const educationRows: Row[] = education.map((e) => ({
     range: formatRange(e.start, e.end),
-    isCurrent: false,
     primary: e.field ? `${e.degree}, ${e.field}` : e.degree,
     secondary: e.school,
-    location: e.location ?? "",
+    right: e.location,
+  }));
+
+  const researchRows: Row[] = research.map((r) => ({
+    range: r.year,
+    primary: r.title,
+    secondary: r.venue,
+  }));
+
+  const certificationRows: Row[] = certifications.map((c) => ({
+    range: c.year,
+    primary: c.name,
+    secondary: c.issuer,
+    right: c.url ? (
+      <ExternalLink href={c.url}>Verify</ExternalLink>
+    ) : undefined,
   }));
 
   return (
@@ -91,34 +170,29 @@ export function Experience() {
       </h2>
 
       <ul className="mt-10 divide-y divide-border/60 border-y border-border/60">
-        {experienceRows.map((row) => (
-          <Row key={`${row.primary}-${row.range}`} row={row} />
+        {experienceRows.map((row, i) => (
+          <RowItem key={`exp-${row.primary}-${i}`} row={row} />
         ))}
       </ul>
 
-      <p className="mt-14 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
-        Education
-      </p>
-      <ul className="mt-4 divide-y divide-border/60 border-y border-border/60">
-        {educationRows.map((row) => (
-          <Row key={`${row.primary}-${row.range}`} row={row} />
-        ))}
-      </ul>
+      <Block label="Education" rows={educationRows} className="mt-14" />
+
+      <Block
+        label="Research"
+        rows={researchRows}
+        action={
+          <ExternalLink href={scholarUrl}>View on Google Scholar</ExternalLink>
+        }
+        className="mt-14"
+      />
+
+      <Block label="Certifications" rows={certificationRows} className="mt-14" />
 
       {linkedin ? (
-        <div className="mt-6 flex justify-end">
-          <a
-            href={linkedin.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
-          >
+        <div className="mt-8 flex justify-end">
+          <ExternalLink href={linkedin.href}>
             Full resume on LinkedIn
-            <ArrowUpRight
-              aria-hidden="true"
-              className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </a>
+          </ExternalLink>
         </div>
       ) : null}
     </AnimatedSection>

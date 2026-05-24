@@ -49,6 +49,20 @@ export type Post = {
   url?: string;
 };
 
+export type Research = {
+  title: string;
+  venue?: string;
+  year: string;
+  url?: string;
+};
+
+export type Certification = {
+  name: string;
+  issuer: string;
+  year: string;
+  url?: string;
+};
+
 export type SocialKind = "github" | "linkedin" | "x" | "email" | "website";
 
 export type Social = {

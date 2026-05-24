@@ -1,11 +1,16 @@
 import type {
+  Certification,
   Education,
   Experience,
   Post,
   Profile,
   Project,
+  Research,
   Social,
 } from "./types";
+
+export const scholarUrl =
+  "https://scholar.google.com/citations?user=3Jyqse4AAAAJ&hl=en";
 
 export const profile: Profile = {
   name: "Sai Mohan Kesapragada",
@@ -89,6 +94,60 @@ export const projects: Project[] = [
       "End-to-end GenAI platform shipped to production at Spire Solutions. Built RAG over multilingual document corpora (Arabic included), text-to-SQL across MySQL and Snowflake, agentic workflows, and offline model support for on-prem deployments.",
     tags: ["RAG", "Text-to-SQL", "Agents", "On-prem LLMs"],
     year: "2023-25",
+  },
+];
+
+export const research: Research[] = [
+  {
+    title: "Building a Chatbot with Amazon Lex",
+    venue: "IJSREM",
+    year: "2022",
+  },
+  {
+    title: "Cloud Integration with an Android Application",
+    year: "2022",
+  },
+  {
+    title:
+      "Public-Key Cryptography and Digital Signatures for Cloud Data Security",
+    year: "2022",
+  },
+];
+
+export const certifications: Certification[] = [
+  {
+    name: "Azure Network Engineer Associate",
+    issuer: "Microsoft",
+    year: "2024",
+    url: "https://learn.microsoft.com/en-us/users/saimohankesapragada-4418/credentials/84074a72f84ee8b8",
+  },
+  {
+    name: "Azure Security Engineer Associate",
+    issuer: "Microsoft",
+    year: "2023",
+    url: "https://learn.microsoft.com/en-us/users/saimohankesapragada-4418/credentials/605f53e141e09c53",
+  },
+  {
+    name: "ML Practitioner",
+    issuer: "Dataiku",
+    year: "2023",
+    url: "https://verify.skilljar.com/c/6u6o6rxrag7y",
+  },
+  {
+    name: "Core Designer",
+    issuer: "Dataiku",
+    year: "2023",
+  },
+  {
+    name: "Certified Observability Engineer",
+    issuer: "Elastic",
+    year: "2022",
+  },
+  {
+    name: "RHCSA",
+    issuer: "Red Hat",
+    year: "2019",
+    url: "https://rhtapps.redhat.com/verify?certId=190-208-488",
   },
 ];
 
